@@ -227,20 +227,20 @@
      <Compile Include="Assets\SteamVR\Scripts\SteamVR_TrackedCamera.cs" />
      <Compile Include="Assets\SteamVR\Scripts\SteamVR_TrackedObject.cs" />
      <Compile Include="Assets\SteamVR\Scripts\SteamVR_Utils.cs" />
-     <None Include="Assets\SteamVR\Resources\SteamVR_Fade.shader" />
-     <None Include="Assets\SteamVR\Resources\SteamVR_ClearAll.shader" />
+     <None Include="Assets\SteamVR\InteractionSystem\Teleport\Shaders\HighlighGlobal.shader" />
+     <None Include="Assets\SteamVR\Resources\SteamVR_SphericalProjection.shader" />
+     <None Include="Assets\SteamVR\InteractionSystem\Core\Shaders\SeeThru.shader" />
      <None Include="Assets\SteamVR\InteractionSystem\Hints\Shaders\ControllerButtonHints.shader" />
      <None Include="Assets\SteamVR\InteractionSystem\Samples\BuggyBuddy\Materials\LightCone.shader" />
      <None Include="Assets\SteamVR\InteractionSystem\Teleport\Shaders\Highlight.shader" />
-     <None Include="Assets\SteamVR\InteractionSystem\Teleport\Shaders\HighlighGlobal.shader" />
-     <None Include="Assets\SteamVR\Resources\SteamVR_SphericalProjection.shader" />
-     <None Include="Assets\SteamVR\Resources\SteamVR_AlphaOut.shader" />
      <None Include="Assets\SteamVR\readme.txt" />
-     <None Include="Assets\SteamVR\InteractionSystem\Core\Shaders\Silhouette.shader" />
+     <None Include="Assets\SteamVR\Resources\SteamVR_Fade.shader" />
      <None Include="Assets\SteamVR\Resources\SteamVR_ColorOut.shader" />
-     <None Include="Assets\SteamVR\InteractionSystem\Core\Shaders\SeeThru.shader" />
      <None Include="Assets\SteamVR\SteamVR.asmdef" />
+     <None Include="Assets\SteamVR\InteractionSystem\Core\Shaders\Silhouette.shader" />
      <None Include="Assets\SteamVR\InteractionSystem\Samples\Squishy\SquishyDeform.shader" />
+     <None Include="Assets\SteamVR\Resources\SteamVR_ClearAll.shader" />
+     <None Include="Assets\SteamVR\Resources\SteamVR_AlphaOut.shader" />
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
  </Reference>
@@ -439,32 +439,23 @@
  <Reference Include="UnityEditor.WindowsStandalone.Extensions">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.4f1/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
  </Reference>
- <Reference Include="UnityEditor.WebGL.Extensions">
- <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.4f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.Android.Extensions">
- <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.4f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.UWP.Extensions">
- <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.4f1/Editor/Data/PlaybackEngines/MetroSupport/UnityEditor.UWP.Extensions.dll</HintPath>
- </Reference>
  <Reference Include="UnityEditor.Advertisements">
- <HintPath>D:/Unity/MechNique/Library/PackageCache/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
+ <HintPath>D:/Rangement trucs Unity/MechNique/Library/PackageCache/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.Editor">
- <HintPath>D:/Unity/MechNique/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Editor.dll</HintPath>
+ <HintPath>D:/Rangement trucs Unity/MechNique/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.StandardEvents">
- <HintPath>D:/Unity/MechNique/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.StandardEvents.dll</HintPath>
+ <HintPath>D:/Rangement trucs Unity/MechNique/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.Tracker">
- <HintPath>D:/Unity/MechNique/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Tracker.dll</HintPath>
+ <HintPath>D:/Rangement trucs Unity/MechNique/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Tracker.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Purchasing">
- <HintPath>D:/Unity/MechNique/Library/PackageCache/com.unity.purchasing@2.0.6/Editor/UnityEditor.Purchasing.dll</HintPath>
+ <HintPath>D:/Rangement trucs Unity/MechNique/Library/PackageCache/com.unity.purchasing@2.0.6/Editor/UnityEditor.Purchasing.dll</HintPath>
  </Reference>
  <Reference Include="Valve.Newtonsoft.Json">
- <HintPath>D:/Unity/MechNique/Assets/SteamVR/Input/Plugins/JSON.NET/Valve.Newtonsoft.Json.dll</HintPath>
+ <HintPath>D:/Rangement trucs Unity/MechNique/Assets/SteamVR/Input/Plugins/JSON.NET/Valve.Newtonsoft.Json.dll</HintPath>
  </Reference>
  <Reference Include="netstandard">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.4f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

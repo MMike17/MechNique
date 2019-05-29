@@ -73,25 +73,25 @@
      <Compile Include="Assets\VRTK\Source\Editor\VRTK_SupportInfoWindow.cs" />
      <Compile Include="Assets\VRTK\Source\Editor\VRTK_UpdatePrompt.cs" />
  <Reference Include="Unity.Timeline.Editor">
- <HintPath>D:/Unity/MechNique/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+ <HintPath>D:/Rangement trucs Unity/MechNique/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>D:/Unity/MechNique/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>D:/Rangement trucs Unity/MechNique/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.PackageManagerUI.Editor">
- <HintPath>D:/Unity/MechNique/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+ <HintPath>D:/Rangement trucs Unity/MechNique/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Timeline">
- <HintPath>D:/Unity/MechNique/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+ <HintPath>D:/Rangement trucs Unity/MechNique/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
  </Reference>
  <Reference Include="Unity.CollabProxy.Editor">
- <HintPath>D:/Unity/MechNique/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+ <HintPath>D:/Rangement trucs Unity/MechNique/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>D:/Unity/MechNique/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>D:/Rangement trucs Unity/MechNique/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.DataPrivacy">
- <HintPath>D:/Unity/MechNique/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+ <HintPath>D:/Rangement trucs Unity/MechNique/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -291,32 +291,23 @@
  <Reference Include="UnityEditor.WindowsStandalone.Extensions">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.4f1/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
  </Reference>
- <Reference Include="UnityEditor.WebGL.Extensions">
- <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.4f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.Android.Extensions">
- <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.4f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll</HintPath>
- </Reference>
- <Reference Include="UnityEditor.UWP.Extensions">
- <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.4f1/Editor/Data/PlaybackEngines/MetroSupport/UnityEditor.UWP.Extensions.dll</HintPath>
- </Reference>
  <Reference Include="UnityEditor.Advertisements">
- <HintPath>D:/Unity/MechNique/Library/PackageCache/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
+ <HintPath>D:/Rangement trucs Unity/MechNique/Library/PackageCache/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.Editor">
- <HintPath>D:/Unity/MechNique/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Editor.dll</HintPath>
+ <HintPath>D:/Rangement trucs Unity/MechNique/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.StandardEvents">
- <HintPath>D:/Unity/MechNique/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.StandardEvents.dll</HintPath>
+ <HintPath>D:/Rangement trucs Unity/MechNique/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.Tracker">
- <HintPath>D:/Unity/MechNique/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Tracker.dll</HintPath>
+ <HintPath>D:/Rangement trucs Unity/MechNique/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Tracker.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Purchasing">
- <HintPath>D:/Unity/MechNique/Library/PackageCache/com.unity.purchasing@2.0.6/Editor/UnityEditor.Purchasing.dll</HintPath>
+ <HintPath>D:/Rangement trucs Unity/MechNique/Library/PackageCache/com.unity.purchasing@2.0.6/Editor/UnityEditor.Purchasing.dll</HintPath>
  </Reference>
  <Reference Include="Valve.Newtonsoft.Json">
- <HintPath>D:/Unity/MechNique/Assets/SteamVR/Input/Plugins/JSON.NET/Valve.Newtonsoft.Json.dll</HintPath>
+ <HintPath>D:/Rangement trucs Unity/MechNique/Assets/SteamVR/Input/Plugins/JSON.NET/Valve.Newtonsoft.Json.dll</HintPath>
  </Reference>
  <Reference Include="mscorlib">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.4f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
@@ -682,6 +673,10 @@
       <Project>{D45173C6-19BF-1387-6906-038608E27F7E}</Project>
       <Name>SteamVR_Input_Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="SteamVR_Windows_EditorHelper.csproj">
+      <Project>{55A0A166-9CF1-CEF5-4390-351F9FCCA8E8}</Project>
+      <Name>SteamVR_Windows_EditorHelper</Name>
+    </ProjectReference>
     <ProjectReference Include="SteamVR_Editor.csproj">
       <Project>{9005BE63-2FBB-F364-85C5-7EEF705AD70F}</Project>
       <Name>SteamVR_Editor</Name>
@@ -689,10 +684,6 @@
     <ProjectReference Include="SteamVR.csproj">
       <Project>{B8CEC070-4EF1-D8AF-EA48-8DEBD60DA7D7}</Project>
       <Name>SteamVR</Name>
-    </ProjectReference>
-    <ProjectReference Include="SteamVR_Windows_EditorHelper.csproj">
-      <Project>{55A0A166-9CF1-CEF5-4390-351F9FCCA8E8}</Project>
-      <Name>SteamVR_Windows_EditorHelper</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

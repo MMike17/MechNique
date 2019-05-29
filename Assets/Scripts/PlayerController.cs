@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     Quaternion rot_offset;
     Vector3 pos_offset;
 
+    bool first_grab;
+
     void Awake ()
     {
         left_hand=transform.GetChild(0);
@@ -56,7 +58,15 @@ public class PlayerController : MonoBehaviour
 
         if(grab_joystick)
         {
-            
+             if (first_grab)
+            {
+                
+            }   
+            else
+            {
+                
+            }
         }
+        first_grab = grab_right.GetState(trigger.hand.source);
     }
 }
