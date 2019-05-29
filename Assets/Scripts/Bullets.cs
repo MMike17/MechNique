@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+/// <summary>class for bullets that are being shot</summary>
 public class Bullets : MonoBehaviour
 {
     public float damage;

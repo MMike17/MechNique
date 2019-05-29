@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+/// <summary>class robots that can take damage</summary>
 public class Robot : MonoBehaviour
 {
     [Header("Settings")]

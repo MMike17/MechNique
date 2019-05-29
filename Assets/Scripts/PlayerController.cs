@@ -2,10 +2,10 @@
 using UnityEngine.UI;
 using Valve.VR;
 
+/// <summary>class for player, centralizes call</summary>
 public class PlayerController : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] SteamVR_Action_Boolean grab_right;
     [SerializeField] float joystick_deadzone;
 
     [Header("Assing in Inspector")]
@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     Vector3 pos_offset;
     Vector2 robot_input;
 
-    bool first_grab;
+    bool first_grab,grab_joystick;
 
     void Awake ()
     {
@@ -33,10 +33,33 @@ public class PlayerController : MonoBehaviour
         joystick=null;
     }
 
+    void GrabRight (Hand hand)
+    {
+        if(hand.grab.GetStateDown(hand.source))
+            rot_offset=hand.transform.rotation;
+
+        if(grab_joystick)
+        {
+            if(!CustomHelper.MOL(hand.transform.rotation.eulerAngles.x,rot_offset.eulerAngles.x,joystick_deadzone))
+                robot_input.x=hand.transform.rotation.eulerAngles.x-rot_offset.eulerAngles.x;
+
+            if(!CustomHelper.MOL(hand.transform.rotation.eulerAngles.z,rot_offset.eulerAngles.z,joystick_deadzone))
+                robot_input.y=hand.transform.rotation.eulerAngles.z-rot_offset.eulerAngles.z;
+        }
+    }
+
+    void NotGrabRight ()
+    {
+        grab_joystick=false;
+    }
+
     void Fire ()
     {
-        foreach(Weapon weapon in weapons)
-            weapon.Fire();
+        if(grab_joystick)
+        {
+            foreach(Weapon weapon in weapons)
+                weapon.Fire();
+        }
     }
 
     void Refresh ()
@@ -56,21 +79,7 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Trigger "+trigger.type+" called on "+trigger.hand.source+" hand");
 
-        bool grab_joystick=trigger.collider.CompareTag("Joystick")&&trigger.hand.source==SteamVR_Input_Sources.RightHand&&trigger.type==TriggerType.stay&&grab_right.GetState(trigger.hand.source);
-
-        if(grab_joystick)
-        {
-             if (first_grab)
-            rot_offset=trigger.hand.transform.rotation;
-            else
-            {
-            if(!CustomHelper.MOL(trigger.hand.transform.rotation.eulerAngles.x,rot_offset.eulerAngles.x,joystick_deadzone))
-                robot_input.x=trigger.hand.transform.rotation.eulerAngles.x-rot_offset.eulerAngles.x;
-
-            if(!CustomHelper.MOL(trigger.hand.transform.rotation.eulerAngles.z,rot_offset.eulerAngles.z,joystick_deadzone))
-                robot_input.y=trigger.hand.transform.rotation.eulerAngles.z-rot_offset.eulerAngles.z;
-            }
-        }
-        first_grab = grab_right.GetState(trigger.hand.source);
+        if(trigger.collider.CompareTag("Joystick")&&trigger.hand.source==SteamVR_Input_Sources.RightHand&&trigger.type==TriggerType.stay&&trigger.hand.grab.GetState(trigger.hand.source))
+            grab_joystick=true;
     }
 }

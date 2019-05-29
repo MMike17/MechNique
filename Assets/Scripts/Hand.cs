@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 using Valve.VR;
 
+/// <summary>enum to describe trigger type (enter, stay, exit)</summary>
 public enum TriggerType {enter,stay,exit};
 
+/// <summary>class for both hands controller, used to send signals upwards</summary>
 [RequireComponent(typeof(BoxCollider),typeof(Rigidbody))]
 public class Hand : MonoBehaviour
 {
     public SteamVR_Input_Sources source;
+    public SteamVR_Action_Boolean grab;
     [SerializeField] SteamVR_Action_Boolean fire;
 
     void Awake ()
@@ -21,6 +24,11 @@ public class Hand : MonoBehaviour
             SendMessageUpwards("Fire",SendMessageOptions.DontRequireReceiver);
         else
             SendMessageUpwards("Refresh",SendMessageOptions.DontRequireReceiver);
+
+        if(grab.GetState(source))
+            SendMessageUpwards("GrabRight",this,SendMessageOptions.DontRequireReceiver);
+        else
+            SendMessageUpwards("NotGrabRight",this,SendMessageOptions.DontRequireReceiver);
     }
 
     void OntriggerEnter (Collider col)
@@ -39,6 +47,7 @@ public class Hand : MonoBehaviour
     }
 }
 
+/// <summary>class to describe trigger events</summary>
 public class Trigger
 {
     public Hand hand;
