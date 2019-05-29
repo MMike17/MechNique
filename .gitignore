@@ -10,3 +10,5 @@ Temp/
 \.vscode/
 
 obj/
+
+Assembly-CSharp\.csproj
