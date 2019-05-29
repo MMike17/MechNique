@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using Valve.VR;
+//using Valve.VR;
 
 public class PlayerController : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] SteamVR_Action_Boolean grab_right;
+    //[SerializeField] SteamVR_Action_Boolean grab_right;
 
     [Header("Assing in Inspector")]
     [SerializeField] Weapon[] weapons;
@@ -50,13 +50,13 @@ public class PlayerController : MonoBehaviour
 
     void OnHandTrigger (Trigger trigger)
     {
-        Debug.Log("Trigger"+trigger.type+" called on "+trigger.hand.source+" hand");
+        //Debug.Log("Trigger"+trigger.type+" called on "+trigger.hand.source+" hand");
 
-        bool grab_joystick=trigger.collider.CompareTag("Joystick")&&trigger.hand.source==SteamVR_Input_Sources.RightHand&&trigger.type==TriggerType.stay&&grab_right.GetState(trigger.hand.source);
+        //bool grab_joystick=trigger.collider.CompareTag("Joystick")&&trigger.hand.source==SteamVR_Input_Sources.RightHand&&trigger.type==TriggerType.stay&&grab_right.GetState(trigger.hand.source);
 
-        if(grab_joystick)
+        /*if(grab_joystick)
         {
             
-        }
+        }*/
     }
 }

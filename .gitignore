@@ -6,3 +6,7 @@ Library/
 *.meta
 *.csmeta
 Temp/
+
+\.vscode/
+
+obj/

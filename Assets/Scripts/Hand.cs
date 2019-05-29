@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
-using Valve.VR;
 
 public enum TriggerType {enter,stay,exit};
 
 [RequireComponent(typeof(BoxCollider),typeof(Rigidbody))]
 public class Hand : MonoBehaviour
 {
-    public SteamVR_Input_Sources source;
-    [SerializeField] SteamVR_Action_Boolean fire;
+    //public SteamVR_Input_Sources source;
+    //[SerializeField] SteamVR_Action_Boolean fire;
 
     void Awake ()
     {
@@ -17,10 +16,10 @@ public class Hand : MonoBehaviour
 
     void Update ()
     {
-        if(fire.GetState(source))
+        /*if(fire.GetState(source))
             SendMessageUpwards("Fire",SendMessageOptions.DontRequireReceiver);
         else
-            SendMessageUpwards("Refresh",SendMessageOptions.DontRequireReceiver);
+            SendMessageUpwards("Refresh",SendMessageOptions.DontRequireReceiver);*/
     }
 
     void OntriggerEnter (Collider col)
