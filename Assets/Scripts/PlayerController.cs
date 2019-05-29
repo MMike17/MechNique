@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] SteamVR_Action_Boolean grab_right;
+    [SerializeField] float joystick_deadzone;
 
     [Header("Assing in Inspector")]
     [SerializeField] Weapon[] weapons;
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour
     Transform left_hand,right_hand,joystick;
     Quaternion rot_offset;
     Vector3 pos_offset;
+    Vector2 robot_input;
 
     void Awake ()
     {
@@ -50,13 +52,21 @@ public class PlayerController : MonoBehaviour
 
     void OnHandTrigger (Trigger trigger)
     {
-        Debug.Log("Trigger"+trigger.type+" called on "+trigger.hand.source+" hand");
+        Debug.Log("Trigger "+trigger.type+" called on "+trigger.hand.source+" hand");
 
         bool grab_joystick=trigger.collider.CompareTag("Joystick")&&trigger.hand.source==SteamVR_Input_Sources.RightHand&&trigger.type==TriggerType.stay&&grab_right.GetState(trigger.hand.source);
 
         if(grab_joystick)
         {
-            
+            // if not grabbed yet
+            rot_offset=trigger.hand.transform.rotation;
+
+            // if already grabbed
+            if(!CustomHelper.MOL(trigger.hand.transform.rotation.eulerAngles.x,rot_offset.eulerAngles.x,joystick_deadzone))
+                robot_input.x=trigger.hand.transform.rotation.eulerAngles.x-rot_offset.eulerAngles.x;
+
+            if(!CustomHelper.MOL(trigger.hand.transform.rotation.eulerAngles.z,rot_offset.eulerAngles.z,joystick_deadzone))
+                robot_input.y=trigger.hand.transform.rotation.eulerAngles.z-rot_offset.eulerAngles.z;
         }
     }
 }
