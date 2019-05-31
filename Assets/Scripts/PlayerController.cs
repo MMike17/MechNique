@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] float joystick_deadzone;
+    [SerializeField] float bop_magnitude;
 
     [Header("Assing in Inspector")]
     [SerializeField] Weapon[] weapons;
@@ -14,52 +15,80 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Image hp_interface;
     
     Robot robot;
-    Transform left_hand,right_hand,joystick;
-    Quaternion rot_offset;
-    Vector3 pos_offset;
-    Vector2 robot_input;
-
-    bool first_grab,grab_joystick;
+    Transform joystick,camera_bop;
+    Hand right_hand,left_hand;
+    Vector3 pos_offset,robot_input;
+    float walking_timer;
+    bool first_grab;
 
     void Awake ()
     {
-        left_hand=transform.GetChild(0);
-        right_hand=transform.GetChild(1);
         robot=GetComponent<Robot>();
 
         weapons_overheat[0].maxValue=weapons[0].overheat_threshold;
         weapons_overheat[1].maxValue=weapons[1].overheat_threshold;
 
         joystick=null;
+        walking_timer=0;
+        first_grab=false;
     }
 
-    void GrabRight (Hand hand)
+    void AwakeHand (Hand hand,string side)
     {
-        if(hand.grab.GetStateDown(hand.source))
-            rot_offset=hand.transform.rotation;
+        if(side=="left")
+            left_hand=hand;
 
-        if(grab_joystick)
+        if(side=="right")
+            right_hand=hand;
+    }
+
+    void Update ()
+    {
+        DetectController();
+
+        Movement();
+
+        if(right_hand.grab_joystick&&right_hand.fire)
+            Fire();
+        else
+            Refresh();
+    }
+
+    void DetectController ()
+    {
+        // right hand
+        if(right_hand.grab_joystick)
         {
-            if(!CustomHelper.MOL(hand.transform.rotation.eulerAngles.x,rot_offset.eulerAngles.x,joystick_deadzone))
-                robot_input.x=hand.transform.rotation.eulerAngles.x-rot_offset.eulerAngles.x;
+            if(!CustomHelper.MOL(right_hand.transform.rotation.eulerAngles.x,right_hand.rot_offset.eulerAngles.x,joystick_deadzone))
+                robot_input.x=right_hand.transform.rotation.eulerAngles.x-right_hand.rot_offset.eulerAngles.x;
 
-            if(!CustomHelper.MOL(hand.transform.rotation.eulerAngles.z,rot_offset.eulerAngles.z,joystick_deadzone))
-                robot_input.y=hand.transform.rotation.eulerAngles.z-rot_offset.eulerAngles.z;
+            if(!CustomHelper.MOL(right_hand.transform.rotation.eulerAngles.z,right_hand.rot_offset.eulerAngles.z,joystick_deadzone))
+                robot_input.z=right_hand.transform.rotation.eulerAngles.z-right_hand.rot_offset.eulerAngles.z;
+
+            if(!CustomHelper.MOL(right_hand.joystick_value.x,0,joystick_deadzone))
+                robot_input.y=right_hand.joystick_value.x;
         }
+        else
+            robot_input=Vector3.zero;
     }
 
-    void NotGrabRight ()
+    void Movement ()
     {
-        grab_joystick=false;
+        // when moving
+        Vector3 bop_vector=transform.position;
+        walking_timer+=Time.deltaTime/* * real speed here <- faster headbop*/;
+
+        bop_vector.y+=Mathf.Sin(walking_timer)*bop_magnitude;
+        camera_bop.position=bop_vector;
+
+        // when not moving
+        camera_bop.position=Vector3.MoveTowards(camera_bop.position,transform.position,0.1f);
     }
 
     void Fire ()
     {
-        if(grab_joystick)
-        {
-            foreach(Weapon weapon in weapons)
-                weapon.Fire();
-        }
+        foreach(Weapon weapon in weapons)
+            weapon.Fire();
     }
 
     void Refresh ()
@@ -73,13 +102,5 @@ public class PlayerController : MonoBehaviour
         weapons_overheat[0].value=Mathf.MoveTowards(weapons_overheat[0].value,weapons[0].overheat,0.5f);
         weapons_overheat[1].value=Mathf.MoveTowards(weapons_overheat[1].value,weapons[1].overheat,0.5f);
         hp_interface.fillAmount=Mathf.MoveTowards(hp_interface.fillAmount,robot.actual_hp/robot.max_hp,0.1f);
-    }
-
-    void OnHandTrigger (Trigger trigger)
-    {
-        Debug.Log("Trigger "+trigger.type+" called on "+trigger.hand.source+" hand");
-
-        if(trigger.collider.CompareTag("Joystick")&&trigger.hand.source==SteamVR_Input_Sources.RightHand&&trigger.type==TriggerType.stay&&trigger.hand.grab.GetState(trigger.hand.source))
-            grab_joystick=true;
     }
 }

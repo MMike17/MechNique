@@ -8,56 +8,42 @@ public enum TriggerType {enter,stay,exit};
 [RequireComponent(typeof(BoxCollider),typeof(Rigidbody))]
 public class Hand : MonoBehaviour
 {
+    [Header("Settings")]
     public SteamVR_Input_Sources source;
-    public SteamVR_Action_Boolean grab;
-    [SerializeField] SteamVR_Action_Boolean fire;
+    [SerializeField] SteamVR_Action_Boolean grab,fire_trigger;
+    [SerializeField] SteamVR_Action_Vector2 joystick;
+
+    [HideInInspector]
+    public Vector2 joystick_value;
+    [HideInInspector]
+    public bool grab_joystick,fire;
+    [HideInInspector]
+    public Quaternion rot_offset;
 
     void Awake ()
     {
         GetComponent<BoxCollider>().isTrigger=true;
         GetComponent<Rigidbody>().useGravity=false;
+
+        joystick_value=Vector2.zero;
     }
 
     void Update ()
     {
-        if(fire.GetState(source))
-            SendMessageUpwards("Fire",SendMessageOptions.DontRequireReceiver);
-        else
-            SendMessageUpwards("Refresh",SendMessageOptions.DontRequireReceiver);
+        if(grab.GetState(source)==false)
+            grab_joystick=false;
 
-        if(grab.GetState(source))
-            SendMessageUpwards("GrabRight",this,SendMessageOptions.DontRequireReceiver);
-        else
-            SendMessageUpwards("NotGrabRight",this,SendMessageOptions.DontRequireReceiver);
-    }
+        fire=fire_trigger.GetState(source);
 
-    void OntriggerEnter (Collider col)
-    {
-        SendMessageUpwards("OnHandTrigger",new Trigger(TriggerType.enter,col,this),SendMessageOptions.DontRequireReceiver);
+        joystick_value=joystick.GetAxis(source);
     }
 
     void OntriggerStay (Collider col)
     {
-        SendMessageUpwards("OnHandTrigger",new Trigger(TriggerType.stay,col,this),SendMessageOptions.DontRequireReceiver);
-    }
-
-    void OntriggerExit (Collider col)
-    {
-        SendMessageUpwards("OnHandTrigger",new Trigger(TriggerType.exit,col,this),SendMessageOptions.DontRequireReceiver);
-    }
-}
-
-/// <summary>class to describe trigger events</summary>
-public class Trigger
-{
-    public Hand hand;
-    public TriggerType type;
-    public Collider collider;
-
-    public Trigger (TriggerType type,Collider collider,Hand hand)
-    {
-        this.type=type;
-        this.collider=collider;
-        this.hand=hand;
+        if(col.CompareTag("Joystick")&&grab.GetStateDown(source))
+        {
+            grab_joystick=true;
+            rot_offset=transform.rotation;
+        }
     }
 }
