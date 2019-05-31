@@ -19,6 +19,8 @@ public class Hand : MonoBehaviour
     public bool grab_joystick,fire;
     [HideInInspector]
     public Quaternion rot_offset;
+    [HideInInspector]
+    public Vector3 pos_offset;
 
     void Awake ()
     {
@@ -44,6 +46,7 @@ public class Hand : MonoBehaviour
         {
             grab_joystick=true;
             rot_offset=transform.rotation;
+            pos_offset=transform.position;
         }
     }
 }

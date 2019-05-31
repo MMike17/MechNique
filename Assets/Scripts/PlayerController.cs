@@ -6,7 +6,7 @@ using Valve.VR;
 public class PlayerController : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] float joystick_deadzone;
+    [SerializeField] float joystick_deadzone,handle_deadzone,aim_deadzone;
     [SerializeField] float bop_magnitude;
 
     [Header("Assing in Inspector")]
@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     Robot robot;
     Transform joystick,camera_bop;
     Hand right_hand,left_hand;
-    Vector3 pos_offset,robot_input;
+    Vector3 pos_offset,robot_input,aim_input;
     float walking_timer;
     bool first_grab;
 
@@ -48,10 +48,9 @@ public class PlayerController : MonoBehaviour
 
         Movement();
 
-        if(right_hand.grab_joystick&&right_hand.fire)
-            Fire();
-        else
-            Refresh();
+        Aim();
+
+        Interface();
     }
 
     void DetectController ()
@@ -70,6 +69,15 @@ public class PlayerController : MonoBehaviour
         }
         else
             robot_input=Vector3.zero;
+
+        // left hand
+        if(left_hand.grab_joystick)
+        {
+            if(!CustomHelper.MOL(left_hand.transform.position.z,left_hand.pos_offset.z,handle_deadzone))
+                aim_input=left_hand.transform.position-left_hand.pos_offset;
+            else
+                aim_input=transform.forward;
+        }
     }
 
     void Movement ()
@@ -85,6 +93,17 @@ public class PlayerController : MonoBehaviour
         camera_bop.position=Vector3.MoveTowards(camera_bop.position,transform.position,0.1f);
     }
 
+    void Aim ()
+    {
+        foreach(Weapon weapon in weapons)
+            weapon.transform.LookAt(weapon.transform.position+aim_input);
+
+        if(left_hand.grab_joystick&&left_hand.fire)
+            Fire();
+        else
+            Refresh();
+    }
+
     void Fire ()
     {
         foreach(Weapon weapon in weapons)
@@ -97,7 +116,7 @@ public class PlayerController : MonoBehaviour
             weapon.Refresh();
     }
 
-    void Iterface ()
+    void Interface ()
     {
         weapons_overheat[0].value=Mathf.MoveTowards(weapons_overheat[0].value,weapons[0].overheat,0.5f);
         weapons_overheat[1].value=Mathf.MoveTowards(weapons_overheat[1].value,weapons[1].overheat,0.5f);
