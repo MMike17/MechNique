@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Weapon[] weapons;
     [SerializeField] Slider[] weapons_overheat;
     [SerializeField] Image hp_interface;
+    [SerializeField] Text score;
     
     Robot robot;
     Transform joystick,camera_bop;
@@ -121,5 +122,6 @@ public class PlayerController : MonoBehaviour
         weapons_overheat[0].value=Mathf.MoveTowards(weapons_overheat[0].value,weapons[0].overheat,0.5f);
         weapons_overheat[1].value=Mathf.MoveTowards(weapons_overheat[1].value,weapons[1].overheat,0.5f);
         hp_interface.fillAmount=Mathf.MoveTowards(hp_interface.fillAmount,robot.actual_hp/robot.max_hp,0.1f);
+        score.text=GameManager.instance.score.ToString();
     }
 }
