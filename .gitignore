@@ -11,8 +11,5 @@ Temp/
 
 obj/
 
-Assembly-CSharp\.csproj
-
-Assembly-CSharp-Editor\.csproj
-
 *.csproj
+*.sln
