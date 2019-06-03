@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     Hand right_hand,left_hand;
 
     Rigidbody rigid;
+    AdjustsColor adjust_color;
     Vector3 pos_offset,robot_input,aim_input;
     float walking_timer;
     Vector2 speed;
@@ -144,5 +145,7 @@ public class PlayerController : MonoBehaviour
         weapons_overheat[1].value=Mathf.MoveTowards(weapons_overheat[1].value,weapons[1].overheat,0.5f);
         hp_interface.fillAmount=Mathf.MoveTowards(hp_interface.fillAmount,robot.actual_hp/robot.max_hp,0.1f);
         score.text=GameManager.instance.score.ToString();
+
+        adjust_color.SetColor(robot.actual_hp/robot.max_hp);
     }
 }
