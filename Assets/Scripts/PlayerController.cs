@@ -6,11 +6,8 @@ using Valve.VR;
 public class PlayerController : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] float joystick_deadzone,handle_deadzone,aim_deadzone;
-    [SerializeField] float bop_magnitude;
-    [SerializeField] float angle_limit_x;
-    [SerializeField] float angle_limit_z;
-    [SerializeField] float max_speed;
+    [SerializeField] float joystick_deadzone;
+    [SerializeField] float handle_deadzone,aim_deadzone,bop_magnitude,angle_limit_x,angle_limit_z,max_speed;
 
     [Header("Assing in Inspector")]
     [SerializeField] Weapon[] weapons;
@@ -21,6 +18,7 @@ public class PlayerController : MonoBehaviour
     Robot robot;
     Transform joystick,camera_bop;
     Hand right_hand,left_hand;
+    AdjustsColor adjust_color;
     Vector3 pos_offset,robot_input,aim_input;
     float walking_timer;
     float speed;
@@ -136,5 +134,7 @@ public class PlayerController : MonoBehaviour
         weapons_overheat[1].value=Mathf.MoveTowards(weapons_overheat[1].value,weapons[1].overheat,0.5f);
         hp_interface.fillAmount=Mathf.MoveTowards(hp_interface.fillAmount,robot.actual_hp/robot.max_hp,0.1f);
         score.text=GameManager.instance.score.ToString();
+
+        adjust_color.SetColor(robot.actual_hp/robot.max_hp);
     }
 }
