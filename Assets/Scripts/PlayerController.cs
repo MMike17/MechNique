@@ -8,6 +8,9 @@ public class PlayerController : MonoBehaviour
     [Header("Settings")]
     [SerializeField] float joystick_deadzone,handle_deadzone,aim_deadzone;
     [SerializeField] float bop_magnitude;
+    [SerializeField] float angle_limit_x;
+    [SerializeField] float angle_limit_z;
+    [SerializeField] float max_speed;
 
     [Header("Assing in Inspector")]
     [SerializeField] Weapon[] weapons;
@@ -20,6 +23,7 @@ public class PlayerController : MonoBehaviour
     Hand right_hand,left_hand;
     Vector3 pos_offset,robot_input,aim_input;
     float walking_timer;
+    float speed;
     bool first_grab;
 
     void Awake ()
@@ -83,6 +87,15 @@ public class PlayerController : MonoBehaviour
 
     void Movement ()
     {
+        //clamping the angle values
+        robot_input.x=Mathf.Clamp(robot_input.x, -angle_limit_x, angle_limit_x);
+        robot_input.z=Mathf.Clamp(robot_input.z, -angle_limit_z, angle_limit_z);
+
+        speed=0;
+
+        //robot_input.y
+
+
         // when moving
         Vector3 bop_vector=transform.position;
         walking_timer+=Time.deltaTime/* * real speed here <- faster headbop*/;
