@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float bop_magnitude;
     [SerializeField] float angle_limit_x;
     [SerializeField] float angle_limit_z;
-    [SerializeField] float max_speed;
+    [SerializeField] Vector2 max_speed;
 
     [Header("Assing in Inspector")]
     [SerializeField] Weapon[] weapons;
@@ -21,9 +21,11 @@ public class PlayerController : MonoBehaviour
     Robot robot;
     Transform joystick,camera_bop;
     Hand right_hand,left_hand;
+
+    Rigidbody rigid;
     Vector3 pos_offset,robot_input,aim_input;
     float walking_timer;
-    float speed;
+    Vector2 speed;
     bool first_grab;
 
     void Awake ()
@@ -91,20 +93,26 @@ public class PlayerController : MonoBehaviour
         robot_input.x=Mathf.Clamp(robot_input.x, -angle_limit_x, angle_limit_x);
         robot_input.z=Mathf.Clamp(robot_input.z, -angle_limit_z, angle_limit_z);
 
-        speed=0;
+        //setting speed.x at a percentage of wrist angle
+        speed.x=(robot_input.x / angle_limit_x * max_speed.x);
 
-        //robot_input.y
+        //don't worry about angle_limit_z and robot_input.z, 'ts just a matter of Vectors. And speed.y actually is speed.z
+        speed.y=(robot_input.z / angle_limit_z * max_speed.y);
 
+        if (robot_input.x !=0 || robot_input.z !=0) 
+        { // when moving
+            Vector3 bop_vector=transform.position;
+            walking_timer+=Time.deltaTime * speed.magnitude;/* * real speed here <- faster headbop*/;
 
-        // when moving
-        Vector3 bop_vector=transform.position;
-        walking_timer+=Time.deltaTime/* * real speed here <- faster headbop*/;
+            bop_vector.y+=Mathf.Sin(walking_timer)*bop_magnitude;
+            camera_bop.position=bop_vector;
+        }
+        else
+        { // when not moving
+             camera_bop.position=Vector3.MoveTowards(camera_bop.position,transform.position,0.1f);
+        }
 
-        bop_vector.y+=Mathf.Sin(walking_timer)*bop_magnitude;
-        camera_bop.position=bop_vector;
-
-        // when not moving
-        camera_bop.position=Vector3.MoveTowards(camera_bop.position,transform.position,0.1f);
+        rigid.velocity= new Vector3 (speed.x, rigid.velocity.y, speed.y);
     }
 
     void Aim ()
