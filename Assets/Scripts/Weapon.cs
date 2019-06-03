@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+/// <summary>class for weapons, manages everything from effects to bullets and fire</summary>
 public class Weapon : MonoBehaviour
 {
     [Header("Settings")]
